@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row bgc shadow">
+  <div class="col-xs-4 mx-auto">
+    <h5 > <br> TESTING DETAILS ENTRY </h5> 
+  </div>
+</div>
+<br>
+<div class="container">
+  <div class="row"> 
+    <div class="col-md-6">
+      <table class= "table table-bordered table-sm ">
+        <form  method="post">
+          {% csrf_token %}
+          {{ form.as_table }}
+      </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-bordered table-sm ">
+        {{ Heat_Status.as_table }}
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mx-auto">
+    <input type="submit" class="btn btn-primary " value="Save"></div>
+    </form>
+  </div>
+</div>
+{%endblock%}

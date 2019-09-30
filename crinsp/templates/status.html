@@ -1,0 +1,72 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="row bgc shadow">
+    <div class="col-xs-4 mx-auto ">
+        <h5 > <br> SEARCH HEAT TESTING STATUS </h5> 
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row mx-auto">
+        <div class="col">
+            <form method="POST" action="/crinsp/status">
+                {%csrf_token%}
+                <div class="from-group">
+                    <input type="text" maxlength="6" name="srh" classs="form-control" placeholeder ="Enter the Heat Number to be searched">
+                </div>
+        </div>
+                <div class= "col">
+                    <button class="submit" class="btn btn-warning">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class="row">
+        {%if messages%}
+        <p class="messages lead font-weight-bold">
+        {% for k in messages%}
+            {{k}}
+        {% endfor %}
+        </p>
+        {%endif%}
+    </div>
+    <br>
+    <div class="row mx-auto">
+        {%if sr %}
+            {%for k in sr%}
+            <div class="container ">
+            <table class="table table-bordered table-sm table-condensed table-hover">
+            <tr>
+                <td>Heat Number</td>
+                <td>{{k.Heat_Number}}</td>
+            </tr>
+            <tr>
+                <td>Rolled in</td>
+                <td> {{k.Testing_Detail.Rolling_Mill}} </td>
+            </tr>
+            <tr>
+                <td>Rolling Section</td>
+                <td> {{k.Testing_Detail.Rail_Section}} </td>
+            </tr>
+            <tr>
+                <td>Tested on (Date)</td>
+                <td>{{k.Testing_Detail.Testing_Date}} </td>
+            </tr>
+            <tr>
+                <td>Tested by</td>
+                <td> Shri. {{k.Testing_Detail.IE_Testing.get_full_name}} - {{k.Testing_Detail.IE_Testing}} </td>
+            </tr>
+            <tr>
+                <td>Result of Testing</td>
+                <td class="font-weight-bold"> Heat {{k.Testing_Detail.Testing_Result}} </td>
+            </tr>
+            </table>
+            </div>
+            {%endfor%}
+        {%endif%}
+    </div>
+</div>
+{%endblock%}
